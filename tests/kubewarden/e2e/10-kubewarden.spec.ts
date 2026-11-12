@@ -50,7 +50,7 @@ test('Install UI extension', { tag: '@ac' }, async({ page, ui }) => {
       const apps = new RancherAppsPage(page)
       await page.getByTestId('extensions-page-menu').click()
       await page.getByText('Manage Repositories', { exact: true }).click()
-      await apps.addRepository({ name: 'kubewarden-extension-github', url: 'https://rancher.github.io/kubewarden-ui/' })
+      await apps.addRepository({ name: 'kubewarden-extension-github', url: 'https://rancher.github.io/security-ui-exts/' })
     })
   }
 
@@ -89,10 +89,10 @@ test('Install Kubewarden by Fleet', { tag: '@ac' }, async({ page }) => {
   const fleetPage = new RancherFleetPage(page)
   await fleetPage.addGitRepo({
     name       : 'kubewarden',
-    url        : 'https://github.com/rancher/kubewarden-ui.git',
+    url        : 'https://github.com/rancher/security-ui-exts.git',
     branch     : 'main',
     selfHealing: true,
-    paths      : ['tests/e2e/fleet/'],
+    paths      : ['tests/kubewarden/e2e/fleet/'],
   }, { timeout: 4 * 60_000 })
 })
 

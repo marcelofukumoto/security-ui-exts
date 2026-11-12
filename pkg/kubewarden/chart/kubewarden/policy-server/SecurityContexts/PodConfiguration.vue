@@ -190,7 +190,7 @@ export default {
       :disabled="disabledByOsWindows"
       @update-seccomp-profile="updateData($event, 'seccompProfile')"
     />
-    <!-- SUPLEMENTAL GROUPS -->
+    <!-- SUPPLEMENTAL GROUPS -->
     <div class="row mb-40">
       <div class="col span-6">
         <h4>

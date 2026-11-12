@@ -8,7 +8,7 @@ const testPod = 'audit-pod-privileged'
 const policyLabels = 'audit-safelabels'
 
 /**
- * Prerequisities:
+ * Prerequisites:
  *  - Audit scanner is enabled and set to run every minute during controller installation.
  *  - Recommended policies are enabled.
  * This test checks that audit scanner shows reports

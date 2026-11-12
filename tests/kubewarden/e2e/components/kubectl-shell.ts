@@ -43,7 +43,7 @@ export class Shell {
   }
 
   /**
-     * Wrapper for invidual shell implementations
+     * Wrapper for individual shell implementations
      * @param cmd shell command to execute
      * @param options.status expected exit code to check, defaults to 0. If NaN check is skipped
      * @param options.timeout for command to finish, defaults to 60s
@@ -147,7 +147,7 @@ export class Shell {
 
   /**
      * Execute in nodejs shell
-     * Could produce differents results from Rancher shell since it's running on host os
+     * Could produce different results from Rancher shell since it's running on host os
      */
   runExecOutput(cmd: string, options?: { status?: number, timeout?: number }): { status: number, output: string } {
     const status = options?.status ?? 0

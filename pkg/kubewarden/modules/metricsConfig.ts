@@ -37,7 +37,7 @@ export function monitoringIsConfigured(config: MonitoringConfig): boolean {
 }
 
 /**
- * Searchs for matching `namespaceSelector` and `matchLabels` selector between `serviceMonitorSpec`, `controllerApp`, and `policyServerSvcs`
+ * Searches for matching `namespaceSelector` and `matchLabels` selector between `serviceMonitorSpec`, `controllerApp`, and `policyServerSvcs`
  * @param config `serviceMonitorSpec, controllerApp, policyServerSvcs` | Needs monitoring app service monitor spec,
  * kubewarden controller app, and the policy server services.
  * @returns `ServiceMonitorConfigured[] | boolean` | If `serviceMonitorSpec` is provided, will return a `ServiceMonitorConfigured` object
