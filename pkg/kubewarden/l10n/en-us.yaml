@@ -321,7 +321,7 @@ kubewarden:
       placeholder: ghcr.io/example/policies/custom-policy:v0.1.0
     mutating:
       label: Mutating
-      tooltip: A mutating policy will rebuild the requests with definied values that are conformant with the policy definition.
+      tooltip: A mutating policy will rebuild the requests with defined values that are conformant with the policy definition.
     mode:
       label: Mode
       tooltip: The monitor mode is a way to deploy policies to the cluster in a way that all requests that go through the policy will be accepted, as if the policy didn't exist. Defaults to 'Protect'.
@@ -496,7 +496,7 @@ kubewarden:
       tooltip: This policy has been signed with { signatures }.
     mutationPolicy:
       label: Mutation
-      tooltip: A mutating policy will rebuild the requests with definied values that are conformant with the policy definition.
+      tooltip: A mutating policy will rebuild the requests with defined values that are conformant with the policy definition.
     contextAware:
       label: Context Aware
       tooltip: Can determine whether an AdmissionRequest has to be accepted or rejected based on other resources already deployed in the cluster.
