@@ -23,7 +23,7 @@ export class TableRow {
 
       // Make sure column with header exists in the table
       const check = `ancestor::table[1]/thead/tr/th[${filter}]`
-      // Get column index - find th with requested name and count th preceeding siblings. Use this count as td index.
+      // Get column index - find th with requested name and count th preceding siblings. Use this count as td index.
       const index = `count(ancestor::table[1]/thead/tr/th[${filter}]/preceding-sibling::th)+1`
 
       // Returns: xpath=td[count(ancestor::table[1]/thead/tr/th[normalize-space(.)="Name"]/preceding-sibling::th)+1]
