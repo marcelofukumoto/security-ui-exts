@@ -82,7 +82,7 @@ export default defineConfig({
         command            : 'yarn serve-pkgs',
         url                : 'http://127.0.0.1:4500',
         reuseExistingServer: !process.env.CI,
-        cwd                : '../',
+        cwd                : '../../',
       }
     : undefined
 })

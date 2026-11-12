@@ -91,7 +91,7 @@ export default {
         return flatRules.flatMap((r) => r[option]);
       });
 
-      return [...new Set(flattened)] || [];
+      return [...new Set(flattened)];
     },
 
     hasNamespaceSelector(row) {

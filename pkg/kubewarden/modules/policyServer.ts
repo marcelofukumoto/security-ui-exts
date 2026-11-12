@@ -45,7 +45,7 @@ export function isPolicyServerResource(labels: Labels, policyServerName: string)
 export function findPolicyServerResource<T>(
   resources: T[],
   policyServerName: string,
-  labelAccessor: (resource: T) => Record<string, string> | undefined = (res: any) => res.metadata?.labels // eslint-disable-line no-unused-vars
+  labelAccessor: (resource: T) => Record<string, string> | undefined = (res: any) => res.metadata?.labels
 ): T | undefined {
   return resources.find((resource: T) => {
     const labels = labelAccessor(resource);

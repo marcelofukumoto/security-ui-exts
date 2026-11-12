@@ -26,7 +26,6 @@ export interface Scope {
   uid?: string;
 }
 
-/* eslint-disable no-unused-vars */
 export enum Severity {
   INFO = 'info',
   LOW = 'low',
@@ -42,7 +41,6 @@ export enum Result {
   FAIL = 'fail',
   ERROR = 'error'
 }
-/* eslint-enable no-unused-vars */
 
 export interface PolicyReportSummary {
   pass?: number;

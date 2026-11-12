@@ -57,7 +57,7 @@ export default {
       return out;
     },
 
-    /** Find the matching schema to the group and return the availble Kinds */
+    /** Find the matching schema to the group and return the available Kinds */
     kindOptions() {
       const kindSchema = [];
 

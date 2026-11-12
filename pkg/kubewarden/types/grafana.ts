@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 export enum KubewardenDashboardLabels {
   DASHBOARD = 'kubewarden/dashboard',
   PART_OF = 'kubewarden/part-of',
@@ -15,7 +14,6 @@ export enum HelmAnnotations {
   NAME = 'meta.helm.sh/release-name',
   NAMESPACE = 'meta.helm.sh/release-namespace'
 }
-/* eslint-enable no-unused-vars */
 
 export interface GrafanaDashboardLabels {
   [KubewardenDashboardLabels.DASHBOARD]: string,

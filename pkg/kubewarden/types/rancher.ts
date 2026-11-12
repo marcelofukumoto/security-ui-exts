@@ -47,7 +47,7 @@ export type Schema = {
   },
   _id: string,
   _group: string,
-  linkFor: (id: string) => string, // eslint-disable-line no-unused-vars
+  linkFor: (id: string) => string,
 }
 
 export const PROJECT = { APP: 'project.cattle.io.app' };

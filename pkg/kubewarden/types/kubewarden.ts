@@ -67,13 +67,11 @@ export const KUBEWARDEN = {
   POLICY_SERVER:            'policies.kubewarden.io.policyserver'
 };
 
-/* eslint-disable no-unused-vars */
 export enum KUBEWARDEN_CRD {
   ADMISSION_POLICY = 'admissionpolicies.policies.kubewarden.io',
   CLUSTER_ADMISSION_POLICY = 'clusteradmissionpolicies.policies.kubewarden.io',
   POLICY_SERVER = 'policyservers.policies.kubewarden.io'
 }
-/* eslint-enable no-unused-vars */
 
 export interface Rule {
   apiGroups: string[];

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 export enum DATA_ANNOTATIONS {
   CONTEXT_AWARE = 'kubewarden/contextAwareResources',
   RULES = 'kubewarden/rules',
@@ -6,7 +5,6 @@ export enum DATA_ANNOTATIONS {
   RESOURCES = 'kubewarden/resources',
   QUESTIONS = 'kubewarden/questions-ui'
 }
-/* eslint-enable no-unused-vars */
 
 
 export interface Link {

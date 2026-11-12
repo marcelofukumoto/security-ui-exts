@@ -135,7 +135,7 @@ export class RancherAppsPage extends BasePage {
   }
 
   /**
-     * Build regex matching chart name or archive for a successfull installation
+     * Build regex matching chart name or archive for a successful installation
      * SUCCESS: helm upgrade ... rancher-kubewarden-defaults /home/shell/helm/kubewarden-defaults-1.7.3.tgz
      * SUCCESS: helm [install|upgrade] [--generate-name=true|name]  /home/shell/helm/opentelemetry-operator-0.38.0.tgz
      */

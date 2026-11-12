@@ -7,7 +7,7 @@ import SortableTable from '@shell/components/SortableTable';
 
 interface Listener {
   row: HTMLElement;
-  listener: (event: Event) => void; // eslint-disable-line no-unused-vars
+  listener: (event: Event) => void;
 }
 
 interface Props {

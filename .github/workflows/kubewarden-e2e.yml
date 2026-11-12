@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: Kubewarden E2E Tests
 
 run-name: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_branch || '' }}
 
@@ -34,7 +34,7 @@ on:
         options:
         - auto
         - source # build extension from main branch
-        - github # https://rancher.github.io/kubewarden-ui/
+        - github # https://rancher.github.io/security-ui-exts/
         - prime  # ui-plugin-charts in released rancher prime
       k3s:
         description: Kubernetes version
@@ -70,14 +70,10 @@ on:
   pull_request:
     branches:
       - main
-      - release-1.6 # rancher 2.8
-      - release-2.1 # rancher 2.9
-      - release-3.1 # rancher 2.10
     paths:
       - 'pkg/kubewarden/**'
       - 'package.json'
-      - 'tests/**'
-      - '!tests/unit/**'
+      - 'tests/kubewarden/**'
 
   workflow_run:
     workflows: ["Build and Release Extension Charts"]
@@ -137,39 +133,14 @@ jobs:
 
 
     # Run schedule workflows only on original repo, not forks
+    # The release workflow is shared by every extension, so only Kubewarden releases run this
     if: |
       (github.event_name != 'schedule' || github.repository_owner == 'rancher') &&
-      (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
+      (github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' &&
+        startsWith(github.event.workflow_run.head_branch, 'kubewarden-')))
     runs-on: self-hosted
     steps:
     # ==================================================================================================
-
-    # Checkout tests specific to used Rancher version
-    - name: Find branch with tests
-      if: ${{ github.event_name != 'pull_request' }}
-      id: find-branch
-      run: |
-        rancher=$(sed 's/^[^0-9]*//' <<< "${{ matrix.rancher }}")
-        case "$rancher" in
-          2.8*)  ref='release-1.6';;
-          2.9*)  ref='release-2.1';;
-          2.10*) ref='release-3.1';;
-          *)     ref='';;
-        esac
-        echo "ref=$ref" | tee -a $GITHUB_OUTPUT
-
-    # Install Rancher specific to PR target branch
-    - name: Find Rancher from PR
-      if: ${{ github.event_name == 'pull_request' }}
-      id: find-rancher
-      run: |
-        case "${{ github.event.pull_request.base.ref }}" in
-          release-1.6) rancher="p2.8";;
-          release-2.1) rancher="p2.9";;
-          release-3.1) rancher="p2.10";;
-          main)        rancher="prime";;
-        esac
-        echo "rancher=$rancher" | tee -a $GITHUB_OUTPUT
 
     # ==================================================================================================
     # Set up parameters and ENV
@@ -188,7 +159,7 @@ jobs:
             ;;
           pull_request)
             KUBEWARDEN=source
-            RANCHER="${{ steps.find-rancher.outputs.rancher }}"
+            RANCHER="prime"
             ;;
           schedule)
             [[ "$RANCHER" == c* ]] && KUBEWARDEN=github || KUBEWARDEN=prime;;
@@ -209,8 +180,6 @@ jobs:
     # Use local kuberlr to avoid version skew
 
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      with:
-        ref: ${{ steps.find-branch.outputs.ref }}
 
     - name: Install k3d
       run: TAG=${{ env.K3D_VERSION }} sudo --preserve-env=TAG k3d-install
@@ -243,18 +212,18 @@ jobs:
         VERSION=0.0.1 yarn build-pkg kubewarden
 
     - name: Install playwright
-      working-directory: tests
+      working-directory: tests/kubewarden
       run: |
         yarn install
         yarn playwright install chromium  # --with-deps not supported on opensuse
 
     - name: Typecheck
       if: github.event_name == 'pull_request'
-      run: npx tsc -p tests/tsconfig.json --noEmit
+      run: npx tsc -p tests/kubewarden/tsconfig.json --noEmit
 
     - name: Execute tests
       timeout-minutes: 120
-      working-directory: tests
+      working-directory: tests/kubewarden
       run: |
         TFILTER="\/[01]0"                                     # Always run installation tests
         [[ "$TESTBASE" == "true" ]] && TFILTER+=" \/[2-69]"   # Schedule everything as base test
@@ -288,8 +257,8 @@ jobs:
       with:
         name: playwright-report-${{ matrix.rancher }}-${{ matrix.mode }}
         path: |
-          tests/playwright-report/index.html
-          tests/playwright-report/data/*.png
+          tests/kubewarden/playwright-report/index.html
+          tests/kubewarden/playwright-report/data/*.png
         retention-days: 15
 
     - name: Clean Up

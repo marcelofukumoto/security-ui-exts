@@ -190,7 +190,7 @@ export default {
 
     shownQuestions() {
       const values = this.value;
-      const vm = this; // eslint-disable-line
+      const vm = this;
 
       if (this.valueGeneration < 0) {
         // Pointless condition to get this to depend on generation and recompute

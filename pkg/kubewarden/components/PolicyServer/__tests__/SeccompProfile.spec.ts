@@ -2,7 +2,6 @@ import { mount } from '@vue/test-utils';
 
 import SeccompProfile, { SECCOMP_OPTIONS } from '@kubewarden/components/PolicyServer/SeccompProfile.vue';
 import { LabeledInput } from '@components/Form/LabeledInput';
-import { LabeledInput } from '@components/Form/LabeledInput';
 import LabeledSelect from '@shell/components/form/LabeledSelect';
 
 const commonMocks = {
