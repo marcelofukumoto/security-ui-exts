@@ -43,20 +43,14 @@ export default function(plugin: IPlugin): void {
   // Add Runtime Security indicator to Workload detail top area
   plugin.addPanel(
     PanelLocation.DETAIL_TOP,
-    {
-      resource: ALL_WORKLOAD_TYPES,
-    },
-    {
-      component: () => import('./components/DeploymentDetailRuntimeSecurity.vue'),
-    }
+    { resource: ALL_WORKLOAD_TYPES },
+    { component: () => import('./components/DeploymentDetailRuntimeSecurity.vue') }
   );
 
   // Add Runtime Violations tab to Workload detail page (v2.12.6, v2.13.2, v2.14.0+)
   plugin.addTab(
     TabLocation.RESOURCE_DETAIL_PAGE,
-    {
-      resource: ALL_WORKLOAD_TYPES,
-    },
+    { resource: ALL_WORKLOAD_TYPES },
     {
       name:       'runtime-violations',
       labelKey:   'runtimeEnforcer.workloadViolations.tab.title',
@@ -70,9 +64,7 @@ export default function(plugin: IPlugin): void {
   // Add Runtime Violations tab to Workload detail drawer (pre-2.12.6, pre-2.13.2)
   plugin.addTab(
     TabLocation.RESOURCE_DETAIL,
-    {
-      resource: ALL_WORKLOAD_TYPES,
-    },
+    { resource: ALL_WORKLOAD_TYPES },
     {
       name:       'runtime-violations',
       labelKey:   'runtimeEnforcer.workloadViolations.tab.title',

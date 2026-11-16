@@ -1,20 +1,20 @@
 <script>
 export default {
-  name: 'ExpandableDescription',
+  name:  'ExpandableDescription',
   props: {
     text: {
-      type: String,
+      type:     String,
       required: true,
-      default: ''
+      default:  ''
     },
     lines: {
-      type: Number,
+      type:    Number,
       default: 3
     }
   },
   data() {
     return {
-      isExpanded: false,
+      isExpanded:    false,
       isTruncatable: false,
     };
   },
@@ -34,6 +34,7 @@ export default {
     checkTruncation() {
       this.$nextTick(() => {
         const el = this.$refs.content;
+
         if (!el) return;
 
         // If the total scrollable height is greater than the clamped visible height,

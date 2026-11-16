@@ -30,9 +30,7 @@ export function init($plugin: any, store: any) {
     overview: true
   });
 
-  configureType(RESOURCE.POLICY_PROPOSALS, {
-    isCreatable: false,
-  });
+  configureType(RESOURCE.POLICY_PROPOSALS, { isCreatable: false });
 
   configureType(RESOURCE.ACTIVE_POLICIES, {
     isCreatable: false,

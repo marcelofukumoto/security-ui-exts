@@ -2,8 +2,8 @@
 import ResourceDetail from '@shell/components/ResourceDetail/index.vue';
 
 export default {
-  name:        'RuntimeEnforcerResourceId',
-  components:  { ResourceDetail },
+  name:       'RuntimeEnforcerResourceId',
+  components: { ResourceDetail },
 };
 </script>
 

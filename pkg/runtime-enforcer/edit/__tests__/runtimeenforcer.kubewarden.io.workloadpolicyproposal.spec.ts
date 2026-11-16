@@ -48,9 +48,7 @@ describe('WorkloadPolicyProposalEdit component', () => {
 
   const createDefaultMocks = () => ({
     $store: store,
-    $route: {
-      params: { cluster: 'local' },
-    },
+    $route: { params: { cluster: 'local' } },
   });
 
   it('adds and removes re-custom-policy-edit class on document.body during lifecycle', () => {
@@ -131,26 +129,12 @@ describe('WorkloadPolicyProposalEdit component', () => {
         mode:  'edit',
         value: {
           metadata: { name: 'test-proposal', namespace: 'default' },
-          spec:     {
-            rulesByContainer: {
-              nginx: {
-                executables: { allowed: ['/usr/bin/nginx'] },
-              },
-            },
-          },
+          spec:     { rulesByContainer: { nginx: { executables: { allowed: ['/usr/bin/nginx'] } } } },
         },
       },
     });
 
-    wrapper.vm.ownerWorkload = {
-      spec: {
-        template: {
-          spec: {
-            containers: [{ name: 'nginx', image: 'nginx:1.25' }],
-          },
-        },
-      },
-    };
+    wrapper.vm.ownerWorkload = { spec: { template: { spec: { containers: [{ name: 'nginx', image: 'nginx:1.25' }] } } } };
 
     expect(wrapper.vm.containerImages).toEqual({ nginx: 'nginx:1.25' });
     expect(wrapper.vm.containerList).toEqual([
@@ -173,13 +157,7 @@ describe('WorkloadPolicyProposalEdit component', () => {
         mode:  'edit',
         value: {
           metadata: { name: 'test-proposal', namespace: 'default' },
-          spec:     {
-            rulesByContainer: {
-              'audit-scanner': {
-                executables: { allowed: [''] },
-              },
-            },
-          },
+          spec:     { rulesByContainer: { 'audit-scanner': { executables: { allowed: [''] } } } },
         },
       },
     });
@@ -200,13 +178,7 @@ describe('WorkloadPolicyProposalEdit component', () => {
         mode:  'edit',
         value: {
           metadata: { name: 'test-proposal', namespace: 'default' },
-          spec:     {
-            rulesByContainer: {
-              'audit-scanner': {
-                executables: { allowed: ['/usr/bin/bash'] },
-              },
-            },
-          },
+          spec:     { rulesByContainer: { 'audit-scanner': { executables: { allowed: ['/usr/bin/bash'] } } } },
         },
       },
     });

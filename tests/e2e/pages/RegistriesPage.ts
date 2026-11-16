@@ -77,37 +77,38 @@ export class RegistriesPage {
 
     this.createForm = {
       // Breadcrumb link + text; the link's own name drops the colon, so the heading is "Registries Configuration Create".
-      heading: main.getByRole('heading', { level: 1, name: /^Registries Configuration:?\s*Create$/ }),
-      namespace: labeledSelect(main, 'Namespace'),
-      name: main.getByRole('textbox', { name: 'Registry' }),
-      description: main.getByRole('textbox', { name: 'Description' }),
-      type: labeledSelect(main, 'Type'),
-      uri: main.getByRole('textbox', { name: 'URI' }),
-      caCertBundle: main.getByRole('textbox', { name: 'CA Cert Bundle' }),
-      readFromFileButton: main.getByRole('button', { name: 'Read from File' }),
+      heading:               main.getByRole('heading', { level: 1, name: /^Registries Configuration:?\s*Create$/ }),
+      namespace:             labeledSelect(main, 'Namespace'),
+      name:                  main.getByRole('textbox', { name: 'Registry' }),
+      description:           main.getByRole('textbox', { name: 'Description' }),
+      type:                  labeledSelect(main, 'Type'),
+      uri:                   main.getByRole('textbox', { name: 'URI' }),
+      caCertBundle:          main.getByRole('textbox', { name: 'CA Cert Bundle' }),
+      readFromFileButton:    main.getByRole('button', { name: 'Read from File' }),
       allowInsecureCheckbox: main.getByRole('checkbox', { name: /^Allow insecure connections/ }),
-      authentication: labeledSelect(main, 'Authentication'),
-      repositories: labeledSelect(main, 'Repositories to scan'),
-      scanInterval: labeledSelect(main, 'Scan Interval'),
-      addPlatformButton: main.getByRole('button', { name: 'Add Platform' }),
-      cancelButton: main.getByTestId('form-cancel'),
-      editAsYamlButton: main.getByTestId('form-yaml'),
-      submitButton: main.getByTestId('form-save'),
+      authentication:        labeledSelect(main, 'Authentication'),
+      repositories:          labeledSelect(main, 'Repositories to scan'),
+      scanInterval:          labeledSelect(main, 'Scan Interval'),
+      addPlatformButton:     main.getByRole('button', { name: 'Add Platform' }),
+      cancelButton:          main.getByTestId('form-cancel'),
+      editAsYamlButton:      main.getByTestId('form-yaml'),
+      submitButton:          main.getByTestId('form-save'),
     };
 
     const detailHeading = main.getByRole('heading', { level: 1, name: /^Registries Configuration:/ });
+
     this.detail = {
-      heading: detailHeading,
+      heading:           detailHeading,
       // StatusBadge has no role or accessible name of its own.
-      statusBadge: detailHeading.locator('.badge'),
-      startScanButton: main.getByRole('button', { name: 'Start scan' }),
-      actionMenuButton: main.getByRole('button', { name: /^More actions/ }),
-      namespaceLabel: main.getByText('Namespace', { exact: true }),
-      uriLabel: main.getByText('URI', { exact: true }),
+      statusBadge:       detailHeading.locator('.badge'),
+      startScanButton:   main.getByRole('button', { name: 'Start scan' }),
+      actionMenuButton:  main.getByRole('button', { name: /^More actions/ }),
+      namespaceLabel:    main.getByText('Namespace', { exact: true }),
+      uriLabel:          main.getByText('URI', { exact: true }),
       scanIntervalLabel: main.getByText('Scan Interval', { exact: true }),
       repositoriesLabel: main.getByText('Repositories', { exact: true }),
-      platformsLabel: main.getByText('Platforms', { exact: true }),
-      recentScansTable: new SortableTable(main),
+      platformsLabel:    main.getByText('Platforms', { exact: true }),
+      recentScansTable:  new SortableTable(main),
     };
   }
 

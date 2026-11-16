@@ -2,7 +2,7 @@ import { test, expect } from '../../fixture/fixture';
 
 // The only spec that navigates through the side menu; every other spec uses page.goto().
 test.describe('Navigation', { tag: '@ui' }, () => {
-  test('opens the dashboard from the "Vulnerability Scanner" menu entry', async ({ imagesPage, dashboardPage, sideNav }) => {
+  test('opens the dashboard from the "Vulnerability Scanner" menu entry', async({ imagesPage, dashboardPage, sideNav }) => {
     await imagesPage.goto();
     await imagesPage.expectLoaded();
 
@@ -11,7 +11,7 @@ test.describe('Navigation', { tag: '@ui' }, () => {
     await dashboardPage.expectLoaded();
   });
 
-  test('opens images from the side menu', async ({ dashboardPage, imagesPage, sideNav }) => {
+  test('opens images from the side menu', async({ dashboardPage, imagesPage, sideNav }) => {
     await dashboardPage.goto();
     await dashboardPage.expectLoaded();
 
@@ -20,7 +20,7 @@ test.describe('Navigation', { tag: '@ui' }, () => {
     await imagesPage.expectLoaded();
   });
 
-  test('opens workloads scan from the advanced group', async ({ dashboardPage, workloadsScanPage, sideNav }) => {
+  test('opens workloads scan from the advanced group', async({ dashboardPage, workloadsScanPage, sideNav }) => {
     await dashboardPage.goto();
     await dashboardPage.expectLoaded();
 
@@ -31,7 +31,7 @@ test.describe('Navigation', { tag: '@ui' }, () => {
     await workloadsScanPage.expectLoaded();
   });
 
-  test('opens registries configuration from the advanced group', async ({ dashboardPage, registriesPage, sideNav }) => {
+  test('opens registries configuration from the advanced group', async({ dashboardPage, registriesPage, sideNav }) => {
     await dashboardPage.goto();
     await dashboardPage.expectLoaded();
 
@@ -41,7 +41,7 @@ test.describe('Navigation', { tag: '@ui' }, () => {
     await registriesPage.expectLoaded();
   });
 
-  test('opens vex management from the advanced group', async ({ dashboardPage, vexManagementPage, sideNav }) => {
+  test('opens vex management from the advanced group', async({ dashboardPage, vexManagementPage, sideNav }) => {
     await dashboardPage.goto();
     await dashboardPage.expectLoaded();
 

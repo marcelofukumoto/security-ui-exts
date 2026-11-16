@@ -46,13 +46,13 @@ async function expectOk(response: Awaited<ReturnType<APIRequestContext['get']>>,
   }
 }
 
-setup('Seed registry and scan data', async ({ request }) => {
+setup('Seed registry and scan data', async({ request }) => {
   setup.skip(process.env.SEED_DATA === 'false', 'SEED_DATA=false - using the cluster\'s existing data');
   setup.setTimeout(SCAN_TIMEOUT + 60_000);
 
   const headers = await csrfHeader(request);
 
-  await setup.step(`registry ${ NAMESPACE }/${ REGISTRY } exists`, async () => {
+  await setup.step(`registry ${ NAMESPACE }/${ REGISTRY } exists`, async() => {
     const existing = await request.get(`${ REGISTRIES_API }/${ NAMESPACE }/${ REGISTRY }`);
 
     if (existing.ok()) {
@@ -76,7 +76,7 @@ setup('Seed registry and scan data', async ({ request }) => {
     console.log(`✓ Created registry ${ REGISTRY }`);
   });
 
-  const scanJobName = await setup.step('a scan of the registry is running or complete', async () => {
+  const scanJobName = await setup.step('a scan of the registry is running or complete', async() => {
     const list = await request.get(`${ SCANJOBS_API }/${ NAMESPACE }`);
 
     await expectOk(list, 'Listing scan jobs');
@@ -108,10 +108,10 @@ setup('Seed registry and scan data', async ({ request }) => {
     return name;
   });
 
-  await setup.step('the scan completes', async () => {
+  await setup.step('the scan completes', async() => {
     let job: ScanJob | undefined;
 
-    await expect.poll(async () => {
+    await expect.poll(async() => {
       const response = await request.get(`${ SCANJOBS_API }/${ NAMESPACE }/${ scanJobName }`);
 
       await expectOk(response, `Reading scan job ${ scanJobName }`);

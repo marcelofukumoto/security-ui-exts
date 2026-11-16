@@ -16,17 +16,15 @@
 import RuntimeSecurityCell from '../formatters/RuntimeSecurityCell.vue';
 
 export default {
-  name: 'DeploymentDetailRuntimeSecurity',
-  components: {
-    RuntimeSecurityCell,
-  },
-  props: {
+  name:       'DeploymentDetailRuntimeSecurity',
+  components: { RuntimeSecurityCell },
+  props:      {
     value: {
-      type: Object,
+      type:    Object,
       default: () => null,
     },
     resource: {
-      type: Object,
+      type:    Object,
       default: () => null,
     },
   },

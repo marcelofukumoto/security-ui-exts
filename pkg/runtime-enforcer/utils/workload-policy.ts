@@ -26,5 +26,6 @@ export function getRuntimeSecurityValue(row: any): string {
   if (row.runtimeSecuritySortValue !== undefined) {
     return row.runtimeSecuritySortValue;
   }
+
   return getBoundPolicyName(row);
 }

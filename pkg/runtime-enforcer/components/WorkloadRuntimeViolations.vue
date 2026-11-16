@@ -94,7 +94,7 @@ import { RESOURCE, PRODUCT_NAME, POLICY_MODE, DOCUMENTATION_URL } from '../types
 import { findBoundPolicy } from '../utils/workload-policy';
 
 export default {
-  name: 'WorkloadRuntimeViolations',
+  name:       'WorkloadRuntimeViolations',
   components: {
     Banner,
     RichTranslation,
@@ -113,12 +113,11 @@ export default {
     },
   },
   data() {
-    return {
-      DOCUMENTATION_URL,
-    };
+    return { DOCUMENTATION_URL };
   },
   async fetch() {
     const existing = this.$store.getters['cluster/all']?.(RESOURCE.ACTIVE_POLICIES);
+
     if (!existing || !existing.length) {
       try {
         await this.$store.dispatch('cluster/findAll', { type: RESOURCE.ACTIVE_POLICIES });
@@ -136,6 +135,7 @@ export default {
     },
     boundPolicy() {
       const allPolicies = this.$store.getters['cluster/all']?.(RESOURCE.ACTIVE_POLICIES) || [];
+
       return findBoundPolicy(this.workload, allPolicies);
     },
     policyName() {
@@ -154,6 +154,7 @@ export default {
       if (this.mode === POLICY_MODE.MONITOR) {
         return this.t('runtimeEnforcer.activePolicies.mode.monitor');
       }
+
       return this.mode || '';
     },
     imageMap() {
@@ -164,11 +165,13 @@ export default {
         if (container?.name) {
           acc[container.name] = container.image || '';
         }
+
         return acc;
       }, {});
     },
     rows() {
       const violations = this.boundPolicy?.status?.violations || [];
+
       return violations.map((violation, index) => {
         const containerName = violation.containerName || '';
         const executablePath = violation.executablePath || '';
@@ -190,53 +193,53 @@ export default {
     headers() {
       return [
         {
-          name:     'executable',
-          value:    'executable',
-          label:    this.t('runtimeEnforcer.activePolicy.violations.table.executable'),
-          sort:     'executable',
-          width:    260,
+          name:  'executable',
+          value: 'executable',
+          label: this.t('runtimeEnforcer.activePolicy.violations.table.executable'),
+          sort:  'executable',
+          width: 260,
         },
         {
-          name:     'occurrences',
-          value:    'occurrences',
-          label:    this.t('runtimeEnforcer.activePolicy.violations.table.occurrences'),
-          sort:     'occurrences',
-          width:    110,
+          name:  'occurrences',
+          value: 'occurrences',
+          label: this.t('runtimeEnforcer.activePolicy.violations.table.occurrences'),
+          sort:  'occurrences',
+          width: 110,
         },
         {
-          name:     'container',
-          value:    'container',
-          label:    this.t('runtimeEnforcer.activePolicy.violations.table.container'),
-          sort:     'container',
-          width:    160,
+          name:  'container',
+          value: 'container',
+          label: this.t('runtimeEnforcer.activePolicy.violations.table.container'),
+          sort:  'container',
+          width: 160,
         },
         {
-          name:     'image',
-          value:    'image',
-          label:    this.t('runtimeEnforcer.activePolicy.violations.table.image'),
-          sort:     'image',
-          width:    180,
+          name:  'image',
+          value: 'image',
+          label: this.t('runtimeEnforcer.activePolicy.violations.table.image'),
+          sort:  'image',
+          width: 180,
         },
         {
-          name:     'node',
-          value:    'node',
-          label:    this.t('runtimeEnforcer.activePolicy.violations.table.node'),
-          sort:     'node',
-          width:    130,
+          name:  'node',
+          value: 'node',
+          label: this.t('runtimeEnforcer.activePolicy.violations.table.node'),
+          sort:  'node',
+          width: 130,
         },
         {
-          name:     'lastObservedTimestamp',
-          value:    'lastObservedTimestamp',
-          label:    this.t('runtimeEnforcer.activePolicy.violations.table.lastOccurrence'),
-          sort:     'lastObservedTimestamp',
-          width:    140,
+          name:  'lastObservedTimestamp',
+          value: 'lastObservedTimestamp',
+          label: this.t('runtimeEnforcer.activePolicy.violations.table.lastOccurrence'),
+          sort:  'lastObservedTimestamp',
+          width: 140,
         },
         {
-          name:     'firstObservedTimestamp',
-          value:    'firstObservedTimestamp',
-          label:    this.t('runtimeEnforcer.activePolicy.violations.table.age'),
-          sort:     'firstObservedTimestamp',
-          width:    100,
+          name:  'firstObservedTimestamp',
+          value: 'firstObservedTimestamp',
+          label: this.t('runtimeEnforcer.activePolicy.violations.table.age'),
+          sort:  'firstObservedTimestamp',
+          width: 100,
         },
       ];
     },

@@ -49,28 +49,29 @@ export class VexManagementPage {
     this.actionMenu = new ActionMenu(page);
 
     this.createForm = {
-      heading: main.getByRole('heading', { level: 1, name: /^VEX Management:?\s*Create$/i }),
-      name: main.getByRole('textbox', { name: 'Name' }),
-      description: main.getByRole('textbox', { name: 'Description' }),
-      uri: main.getByRole('textbox', { name: 'VEX hub URI' }),
-      enabledCheckbox: main.getByRole('checkbox', { name: /^Enabled/ }),
-      cancelButton: main.getByTestId('form-cancel'),
+      heading:          main.getByRole('heading', { level: 1, name: /^VEX Management:?\s*Create$/i }),
+      name:             main.getByRole('textbox', { name: 'Name' }),
+      description:      main.getByRole('textbox', { name: 'Description' }),
+      uri:              main.getByRole('textbox', { name: 'VEX hub URI' }),
+      enabledCheckbox:  main.getByRole('checkbox', { name: /^Enabled/ }),
+      cancelButton:     main.getByTestId('form-cancel'),
       editAsYamlButton: main.getByTestId('form-yaml'),
-      submitButton: main.getByTestId('form-save'),
+      submitButton:     main.getByTestId('form-save'),
     };
 
     const detailHeading = main.getByRole('heading', { level: 1, name: /^VEX management:/i });
+
     this.detail = {
-      heading: detailHeading,
+      heading:          detailHeading,
       // StatusBadge has no role or accessible name of its own.
-      statusBadge: detailHeading.locator('.badge'),
+      statusBadge:      detailHeading.locator('.badge'),
       // Matched by text: the extension sets aria-label="Refresh data" on this button (VexDetails.vue).
-      toggleButton: main.getByRole('button').filter({ hasText: /(Disable|Enable)\s*$/ }),
+      toggleButton:     main.getByRole('button').filter({ hasText: /(Disable|Enable)\s*$/ }),
       actionMenuButton: main.getByTestId('masthead-action-menu'),
-      uriLabel: main.getByText('URI', { exact: true }),
-      createdByLabel: main.getByText('Created by', { exact: true }),
-      lastSyncLabel: main.getByText('Last sync', { exact: true }),
-      updatedLabel: main.getByText('Updated', { exact: true }),
+      uriLabel:         main.getByText('URI', { exact: true }),
+      createdByLabel:   main.getByText('Created by', { exact: true }),
+      lastSyncLabel:    main.getByText('Last sync', { exact: true }),
+      updatedLabel:     main.getByText('Updated', { exact: true }),
     };
   }
 

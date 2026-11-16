@@ -202,8 +202,8 @@ export default {
 
   data() {
     return {
-      errors:                   [],
-      ownerWorkload:            null,
+      errors:        [],
+      ownerWorkload: null,
     };
   },
 
@@ -236,12 +236,12 @@ export default {
     },
     namespaceLocation() {
       return {
-        name: 'c-cluster-product-resource-id',
+        name:   'c-cluster-product-resource-id',
         params: {
-          cluster: this.$route.params.cluster,
-          product: 'explorer',
+          cluster:  this.$route.params.cluster,
+          product:  'explorer',
           resource: NAMESPACE,
-          id: this.namespace,
+          id:       this.namespace,
         },
       };
     },
@@ -285,6 +285,7 @@ export default {
       if (!this.value.spec) {
         this.value.spec = {};
       }
+
       return this.value.spec;
     },
     containerImages() {
@@ -292,6 +293,7 @@ export default {
           this.ownerWorkload?.spec?.template?.spec?.containers ||
           this.ownerWorkload?.spec?.jobTemplate?.spec?.template?.spec?.containers ||
           [];
+
       return containers.reduce((acc, container) => {
         acc[container.name] = container.image;
 
@@ -309,9 +311,7 @@ export default {
         return {
           name:        containerName,
           image:       this.containerImages[containerName] || this.t('generic.none'),
-          executables: allowed.map((path) => ({
-            path
-          }))
+          executables: allowed.map((path) => ({ path }))
         };
       });
     },

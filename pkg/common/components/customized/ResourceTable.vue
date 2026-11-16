@@ -578,7 +578,7 @@ export default {
       }
 
       // SUPPLEMENT (instead of REPLACE) defaults with listGroups (given listGroupsWillOverride is false)
-      if (!!this.options?.listGroups?.length) {
+      if (this.options?.listGroups?.length) {
         return standard.concat(this.options.listGroups);
       }
 

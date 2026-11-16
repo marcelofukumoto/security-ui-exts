@@ -222,7 +222,7 @@ export default {
 
   async fetch() {
     const loadPromises = Object.values(WORKLOAD_KIND_TO_TYPE_MAPPING).map((type) =>
-        this.$store.dispatch('cluster/findAll', { type })
+      this.$store.dispatch('cluster/findAll', { type })
     );
 
     await Promise.allSettled(loadPromises);
@@ -242,12 +242,12 @@ export default {
     },
     namespaceLocation() {
       return {
-        name: 'c-cluster-product-resource-id',
+        name:   'c-cluster-product-resource-id',
         params: {
-          cluster: this.$route.params.cluster,
-          product: 'explorer',
+          cluster:  this.$route.params.cluster,
+          product:  'explorer',
           resource: NAMESPACE,
-          id: this.namespace,
+          id:       this.namespace,
         },
       };
     },
@@ -304,6 +304,7 @@ export default {
 
     containerImages() {
       const refImages = this.value.workloadRef?.imageMap;
+
       if (refImages && Object.keys(refImages).length > 0) {
         return refImages;
       }
@@ -319,9 +320,7 @@ export default {
         return {
           name:        containerName,
           image:       containerRules.image || this.containerImages?.[containerName] || this.t('generic.none'),
-          executables: allowed.map((path) => ({
-            path
-          }))
+          executables: allowed.map((path) => ({ path }))
         };
       });
     },
@@ -398,8 +397,8 @@ export default {
       Object.keys(rules).forEach((containerName) => {
         if (rules[containerName]?.executables?.allowed) {
           rules[containerName].executables.allowed = rules[containerName].executables.allowed
-              .map((p) => p.trim())
-              .filter(Boolean);
+            .map((p) => p.trim())
+            .filter(Boolean);
         }
       });
 

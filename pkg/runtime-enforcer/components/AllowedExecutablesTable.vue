@@ -22,9 +22,9 @@ const rows = computed(() => {
 
     allowed.forEach((execPath: string, index: number) => {
       items.push({
-        id:          `${containerName}-${index}-${execPath}`,
-        executable:  execPath,
-        container:   containerName,
+        id:         `${containerName}-${index}-${execPath}`,
+        executable: execPath,
+        container:  containerName,
         image,
       });
     });
