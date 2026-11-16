@@ -5,7 +5,7 @@ import { PRODUCT_NAME } from '@runtime-enforcer/types/runtime-enforcer.ts';
 import { TIMESTAMP } from '@shell/config/labels-annotations';
 import RadioButton from '@components/Form/Radio/RadioButton.vue';
 import { _EDIT } from '@shell/config/query-params';
-import { DOCUMENTATION_URL, WORKLOAD_PREFIX, POLICY_LABEL_KEY, WORKLOAD_RESTART_TS_LABEL_KEY } from '@runtime-enforcer/types';
+import { DOCUMENTATION_URL, WORKLOAD_PREFIX, POLICY_LABEL_KEY } from '@runtime-enforcer/types';
 import RichTranslation from '@shell/components/RichTranslation.vue';
 import SubtleLink from '@shell/components/SubtleLink.vue';
 import WorkloadTag from '@runtime-enforcer/components/common/WorkloadTag.vue';

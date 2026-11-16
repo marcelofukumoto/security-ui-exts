@@ -31,8 +31,6 @@ export default {
       return this.value || this.row?.metadata?.name || '';
     },
     activePoliciesDetailLink() {
-      const cluster = this.$route.params.cluster;
-
       return {
         name:   'c-cluster-product-resource-namespace-id',
         params: {

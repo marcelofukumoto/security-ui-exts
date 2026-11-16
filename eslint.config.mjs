@@ -42,7 +42,8 @@ export default [
       // === General JS/TS style ===
       "no-console": "warn",
       "no-debugger": "warn",
-      "no-unused-vars": "warn",
+      // Replaced by @typescript-eslint/no-unused-vars, which understands parameter names in type signatures
+      "no-unused-vars": "off",
       "semi": ["warn", "always"],
       "quotes": ["warn", "single", { avoidEscape: true, allowTemplateLiterals: true }],
       "indent": ["warn", 2],
@@ -113,7 +114,7 @@ export default [
       "vue/no-mutating-props": "off",
 
       // === TypeScript ===
-      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": ["warn", { ignoreRestSiblings: true }],
       "@typescript-eslint/no-empty-function": "off",
       "@typescript-eslint/ban-types": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -154,10 +155,17 @@ export default [
     ...cypress.configs.recommended,
   },
 
+  // --- Playwright e2e: setup steps report progress on the console ---
+  {
+    files: ["tests/e2e/**/*.ts"],
+    rules: { "no-console": "off" },
+  },
+
   // --- Ignored paths (replaces .eslintignore) ---
   {
     ignores: [
       "dist/**",
+      "dist-pkg/**",
       "node_modules/**",
       "coverage/**",
       "cypress/videos/**",

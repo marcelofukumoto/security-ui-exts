@@ -528,7 +528,7 @@ export default {
     },
 
     loading: {
-      handler(neu, old) {
+      handler(neu) {
         // Always ensure the Refresh button phase aligns with loading state (to ensure external phase changes which can then reset the internal phase changed by click)
         this.refreshButtonPhase = neu ? ASYNC_BUTTON_STATES.WAITING : ASYNC_BUTTON_STATES.ACTION;
 

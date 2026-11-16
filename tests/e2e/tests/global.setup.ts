@@ -1,11 +1,9 @@
 //Filename: global.setup.ts
-import { chromium, test, expect, Page } from '@playwright/test';
 import { test as setup } from '@playwright/test';
 
 // Note: Using Playwright's built-in waiting methods instead of custom delay functions
 // Old utility functions (wait, delay, etc.) are no longer needed
 
-import { STORAGE_STATE } from '../playwright.config';
 
 import * as fs from 'fs';
 import { Console } from 'console';
