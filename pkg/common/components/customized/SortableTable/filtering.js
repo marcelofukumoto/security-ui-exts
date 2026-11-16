@@ -163,7 +163,7 @@ export default {
   },
 
   watch: {
-    arrangedRows(q) {
+    arrangedRows() {
       // The rows changed so the old filter result is no longer useful
       this.previousResult = null;
     },
@@ -197,7 +197,7 @@ function columnsToSearchField(columns) {
   return out.filter((x) => !!x);
 }
 
-const ipLike = /^[0-9a-f\.:]+$/i;
+const ipLike = /^[0-9a-f.:]+$/i;
 
 function handleStringSearch(searchFields, searchTokens, row) {
   for ( let j = 0 ; j < searchTokens.length ; j++ ) {

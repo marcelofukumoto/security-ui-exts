@@ -225,7 +225,7 @@ async function fetchSecondaryResources({ canPaginate }: { canPaginate: boolean }
   );
 }
 
-async function fetchPageSecondaryResources({ force, page }: { force: any; page: any[] }) {
+async function fetchPageSecondaryResources({ page }: { force: any; page: any[] }) {
   if (!page?.length) {
     return;
   }

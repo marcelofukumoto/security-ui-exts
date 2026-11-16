@@ -1,5 +1,3 @@
-import type { WorkloadPolicyProposal } from '@runtime-enforcer/types';
-
 export const FIGMA_COLUMN_WIDTH = {
   policy:          289,
   namespace:       240,
