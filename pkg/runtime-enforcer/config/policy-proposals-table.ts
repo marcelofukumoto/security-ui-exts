@@ -1,21 +1,21 @@
 import type { WorkloadPolicyProposal } from '@runtime-enforcer/types';
 
 export const FIGMA_COLUMN_WIDTH = {
-  policy:       289,
-  namespace:    240,
-  workload:     150,
-  workloadType: 160,
-  containers:   130,
-  executables:  130,
-  age:          100,
-  promote:      100,
-  container:    230,
-  image:        250,
+  policy:          289,
+  namespace:       240,
+  workload:        150,
+  workloadType:    160,
+  containers:      130,
+  executables:     130,
+  age:             100,
+  promote:         100,
+  container:       230,
+  image:           250,
   executableCount: 120,
-  mode: 120,
-  status: 120,
-  violations: 100,
-  occurrences: 120,
+  mode:            120,
+  status:          120,
+  violations:      100,
+  occurrences:     120,
 };
 
 type HeaderBuilderInput = {
@@ -25,12 +25,12 @@ type HeaderBuilderInput = {
 export function getPolicyProposalHeaders(input: HeaderBuilderInput) {
   const baseColumns = [
     {
-      name:     'policy',
-      labelKey: 'runtimeEnforcer.policyProposals.columns.policy',
-      value:    'metadata.name',
-      sort:     'metadata.name',
+      name:      'policy',
+      labelKey:  'runtimeEnforcer.policyProposals.columns.policy',
+      value:     'metadata.name',
+      sort:      'metadata.name',
       formatter: 'PolicyProposalRouteLink',
-      width:    FIGMA_COLUMN_WIDTH.policy,
+      width:     FIGMA_COLUMN_WIDTH.policy,
     },
     {
       name:      'namespace',
@@ -41,12 +41,12 @@ export function getPolicyProposalHeaders(input: HeaderBuilderInput) {
       width:     FIGMA_COLUMN_WIDTH.namespace,
     },
     {
-      name:     'workload',
-      labelKey: 'runtimeEnforcer.policyProposals.columns.workload',
-      value:    'metadata.ownerReferences.0.name',
-      sort:     'metadata.ownerReferences.0.name',
+      name:      'workload',
+      labelKey:  'runtimeEnforcer.policyProposals.columns.workload',
+      value:     'metadata.ownerReferences.0.name',
+      sort:      'metadata.ownerReferences.0.name',
       formatter: 'WorkloadRouteLink',
-      width:    FIGMA_COLUMN_WIDTH.workload,
+      width:     FIGMA_COLUMN_WIDTH.workload,
     },
     {
       name:     'workloadType',
@@ -70,12 +70,12 @@ export function getPolicyProposalHeaders(input: HeaderBuilderInput) {
       width:    FIGMA_COLUMN_WIDTH.executables,
     },
     {
-      name:     'age',
-      labelKey: 'runtimeEnforcer.policyProposals.columns.age',
-      value:    'metadata.creationTimestamp',
-      sort:     'metadata.creationTimestamp:desc',
+      name:      'age',
+      labelKey:  'runtimeEnforcer.policyProposals.columns.age',
+      value:     'metadata.creationTimestamp',
+      sort:      'metadata.creationTimestamp:desc',
       formatter: 'AgeValue',
-      width:    FIGMA_COLUMN_WIDTH.age,
+      width:     FIGMA_COLUMN_WIDTH.age,
     },
   ];
 
@@ -83,12 +83,12 @@ export function getPolicyProposalHeaders(input: HeaderBuilderInput) {
     return [
       ...baseColumns,
       {
-        name:     'promote',
-        label:    '\u00A0',
-        value:    'promote',
+        name:      'promote',
+        label:     '\u00A0',
+        value:     'promote',
         formatter: 'PromoteButton',
-        sort:     false,
-        width:    FIGMA_COLUMN_WIDTH.promote,
+        sort:      false,
+        width:     FIGMA_COLUMN_WIDTH.promote,
       },
     ];
   }
@@ -99,33 +99,33 @@ export function getPolicyProposalHeaders(input: HeaderBuilderInput) {
 export function getContainerTableHeaders() {
   return [
     {
-      name:  'container',
-      value: 'container',
+      name:     'container',
+      value:    'container',
       labelKey: 'runtimeEnforcer.policyProposal.containers.table.container',
-      sort:  'container',
-      width: FIGMA_COLUMN_WIDTH.container,
+      sort:     'container',
+      width:    FIGMA_COLUMN_WIDTH.container,
     },
     {
-      name:  'image',
-      value: 'image',
+      name:     'image',
+      value:    'image',
       labelKey: 'runtimeEnforcer.policyProposal.containers.table.image',
-      sort:  'image',
-      width: FIGMA_COLUMN_WIDTH.image,
+      sort:     'image',
+      width:    FIGMA_COLUMN_WIDTH.image,
     },
     {
-      name:  'executableCount',
-      value: 'executableCount',
+      name:     'executableCount',
+      value:    'executableCount',
       labelKey: 'runtimeEnforcer.policyProposal.containers.table.executables',
-      sort:  'executableCount',
-      width: FIGMA_COLUMN_WIDTH.executableCount,
+      sort:     'executableCount',
+      width:    FIGMA_COLUMN_WIDTH.executableCount,
     },
     {
-      name:   'executables',
-      value:  'executables',
-      label:  '\u00A0',
+      name:      'executables',
+      value:     'executables',
+      label:     '\u00A0',
       formatter: 'ExecutableLabels',
-      sort:   false,
-      search: false,
+      sort:      false,
+      search:    false,
     },
   ];
 }
@@ -134,12 +134,12 @@ export function getContainerTableHeaders() {
 export function getActivePoliciesHeaders() {
   return [
     {
-      name:     'policy',
-      labelKey: 'runtimeEnforcer.activePolicies.columns.policy',
-      value:    'metadata.name',
-      sort:     'metadata.name',
+      name:      'policy',
+      labelKey:  'runtimeEnforcer.activePolicies.columns.policy',
+      value:     'metadata.name',
+      sort:      'metadata.name',
       formatter: 'ActivePoliciesRouteLink',
-      width:    FIGMA_COLUMN_WIDTH.policy,
+      width:     FIGMA_COLUMN_WIDTH.policy,
     },
     {
       name:      'namespace',
@@ -150,12 +150,12 @@ export function getActivePoliciesHeaders() {
       width:     FIGMA_COLUMN_WIDTH.namespace,
     },
     {
-      name:     'workload',
-      labelKey: 'runtimeEnforcer.activePolicies.columns.workload',
-      value:    'workloadRef.workloadName',
-      sort:     'workloadRef.workloadName',
+      name:      'workload',
+      labelKey:  'runtimeEnforcer.activePolicies.columns.workload',
+      value:     'workloadRef.workloadName',
+      sort:      'workloadRef.workloadName',
       formatter: 'WorkloadRouteLink',
-      width:    FIGMA_COLUMN_WIDTH.workload,
+      width:     FIGMA_COLUMN_WIDTH.workload,
     },
     {
       name:     'workloadType',
@@ -165,20 +165,20 @@ export function getActivePoliciesHeaders() {
       width:    FIGMA_COLUMN_WIDTH.workloadType,
     },
     {
-      name:     'mode',
-      labelKey: 'runtimeEnforcer.activePolicies.columns.mode',
-      value:    'spec.mode',
-      sort:     'spec.mode',
+      name:      'mode',
+      labelKey:  'runtimeEnforcer.activePolicies.columns.mode',
+      value:     'spec.mode',
+      sort:      'spec.mode',
       formatter: 'ModeValue',
-      width:    FIGMA_COLUMN_WIDTH.mode,
+      width:     FIGMA_COLUMN_WIDTH.mode,
     },
     {
-      name:     'status',
-      labelKey: 'runtimeEnforcer.activePolicies.columns.status',
-      value:    'status.phase',
-      sort:     'status.phase',
+      name:      'status',
+      labelKey:  'runtimeEnforcer.activePolicies.columns.status',
+      value:     'status.phase',
+      sort:      'status.phase',
       formatter: 'StatusBadge',
-      width:    FIGMA_COLUMN_WIDTH.status,
+      width:     FIGMA_COLUMN_WIDTH.status,
     },
     {
       name:     'violations',

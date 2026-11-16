@@ -66,9 +66,7 @@ describe('WorkloadPolicyEdit component', () => {
 
   const createDefaultMocks = () => ({
     $store: store,
-    $route: {
-      params: { cluster: 'local' },
-    },
+    $route: { params: { cluster: 'local' } },
   });
 
   it('adds and removes re-custom-policy-edit class on document.body during lifecycle', () => {
@@ -102,7 +100,9 @@ describe('WorkloadPolicyEdit component', () => {
       props: {
         mode:  'edit',
         value: {
-          metadata:    { name: 'deploy-nginx-ingress', namespace: 'ingress', creationTimestamp: '2026-08-01T00:00:00Z' },
+          metadata: {
+            name: 'deploy-nginx-ingress', namespace: 'ingress', creationTimestamp: '2026-08-01T00:00:00Z'
+          },
           workloadRef: {
             workloadName: 'nginx-ingress',
             workloadType: 'Deployment',
@@ -153,11 +153,7 @@ describe('WorkloadPolicyEdit component', () => {
           },
           spec: {
             mode:             'protect',
-            rulesByContainer: {
-              'nginx-ingress': {
-                executables: { allowed: ['/usr/bin/nginx'] },
-              },
-            },
+            rulesByContainer: { 'nginx-ingress': { executables: { allowed: ['/usr/bin/nginx'] } } },
           },
         },
       },
@@ -182,11 +178,7 @@ describe('WorkloadPolicyEdit component', () => {
           metadata: { name: 'payments-api-policy', namespace: 'ingress' },
           spec:     {
             mode:             'protect',
-            rulesByContainer: {
-              'deploy-nginx-ingress': {
-                executables: { allowed: [''] },
-              },
-            },
+            rulesByContainer: { 'deploy-nginx-ingress': { executables: { allowed: [''] } } },
           },
         },
       },
@@ -210,11 +202,7 @@ describe('WorkloadPolicyEdit component', () => {
           metadata: { name: 'payments-api-policy', namespace: 'ingress' },
           spec:     {
             mode:             'protect',
-            rulesByContainer: {
-              'deploy-nginx-ingress': {
-                executables: { allowed: ['/usr/bin/nginx'] },
-              },
-            },
+            rulesByContainer: { 'deploy-nginx-ingress': { executables: { allowed: ['/usr/bin/nginx'] } } },
           },
         },
       },

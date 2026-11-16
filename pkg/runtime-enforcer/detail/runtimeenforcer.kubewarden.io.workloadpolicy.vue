@@ -15,9 +15,9 @@ import ActionMenu from '@shell/components/ActionMenuShell.vue';
 import StatusBadge from '@runtime-enforcer/components/common/StatusBadge.vue';
 import ExpandableDescription from '@common/components/ExpandableDescription.vue';
 import { WORKLOAD_KIND_TO_TYPE_MAPPING } from '@shell/config/types';
-import AllowedExecutablesTable from "@runtime-enforcer/components/AllowedExecutablesTable.vue";
-import NodesEnforcementTable from "@runtime-enforcer/components/NodesEnforcementTable.vue";
-import ViolationsTable from "@runtime-enforcer/components/ViolationsTable.vue";
+import AllowedExecutablesTable from '@runtime-enforcer/components/AllowedExecutablesTable.vue';
+import NodesEnforcementTable from '@runtime-enforcer/components/NodesEnforcementTable.vue';
+import ViolationsTable from '@runtime-enforcer/components/ViolationsTable.vue';
 
 const props = defineProps<{
   value: any;

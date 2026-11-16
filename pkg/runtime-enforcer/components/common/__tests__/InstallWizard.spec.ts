@@ -22,11 +22,7 @@ const createSteps = () => ([
 ]);
 
 const createWrapper = (props = {}) => {
-  const store = createStore({
-    getters: {
-      'i18n/t': () => (key: string) => key === 'runtimeEnforcer.dashboard.appInstall.title' ? 'Runtime Enforcer' : key,
-    },
-  });
+  const store = createStore({ getters: { 'i18n/t': () => (key: string) => key === 'runtimeEnforcer.dashboard.appInstall.title' ? 'Runtime Enforcer' : key } });
 
   return mount(InstallWizard, {
     props: {
@@ -39,9 +35,7 @@ const createWrapper = (props = {}) => {
       install:       '<div data-testid="install-slot">Install Content</div>',
       bannerSubtext: '<span data-testid="banner-subtext">Banner Subtext</span>',
     },
-    global: {
-      plugins: [store],
-    },
+    global: { plugins: [store] },
   });
 };
 

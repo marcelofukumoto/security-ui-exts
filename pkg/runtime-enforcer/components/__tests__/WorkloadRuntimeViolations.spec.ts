@@ -32,10 +32,8 @@ describe('WorkloadRuntimeViolations.vue', () => {
     },
     spec: {
       template: {
-        metadata: {
-          labels: { [POLICY_LABEL_KEY]: 'strict-db' },
-        },
-        spec: {
+        metadata: { labels: { [POLICY_LABEL_KEY]: 'strict-db' } },
+        spec:     {
           containers: [
             { name: 'cronjob-nightly-etl', image: 'quay.io/cauth2-proxy:v7.6.0' },
           ],
@@ -49,9 +47,7 @@ describe('WorkloadRuntimeViolations.vue', () => {
       name:      'strict-db',
       namespace: 'cattle-system',
     },
-    spec: {
-      mode: POLICY_MODE.PROTECT,
-    },
+    spec:   { mode: POLICY_MODE.PROTECT },
     status: {
       activeViolationCount: 1,
       violationCount:       60,
@@ -77,6 +73,7 @@ describe('WorkloadRuntimeViolations.vue', () => {
           if (type === RESOURCE.ACTIVE_POLICIES) {
             return [mockPolicy];
           }
+
           return [];
         },
         'i18n/t':         () => (key: string) => key,
@@ -249,7 +246,9 @@ describe('WorkloadRuntimeViolations.vue', () => {
           $route: { params: { cluster: 'local' } },
           t:      (key: string) => key,
         },
-        stubs: { SortableTable: true, Banner: true, RichTranslation: true, SubtleLink: true },
+        stubs: {
+          SortableTable: true, Banner: true, RichTranslation: true, SubtleLink: true
+        },
       },
     });
 

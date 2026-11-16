@@ -96,7 +96,7 @@ day.extend(relativeTime);
 day.extend(utc);
 
 export default {
-  name: 'RuntimeSecurityCell',
+  name:  'RuntimeSecurityCell',
   props: {
     value: {
       type:    String,
@@ -126,6 +126,7 @@ export default {
   },
   async fetch() {
     const existing = this.$store.getters['cluster/all']?.(RESOURCE.ACTIVE_POLICIES);
+
     if (!existing || !existing.length) {
       try {
         await this.$store.dispatch('cluster/findAll', { type: RESOURCE.ACTIVE_POLICIES });
@@ -140,6 +141,7 @@ export default {
     },
     boundPolicy() {
       const allPolicies = this.$store.getters['cluster/all']?.(RESOURCE.ACTIVE_POLICIES) || [];
+
       return findBoundPolicy(this.row, allPolicies);
     },
     isProtected() {
@@ -161,6 +163,7 @@ export default {
       if (this.mode === POLICY_MODE.MONITOR) {
         return this.t('runtimeEnforcer.activePolicies.mode.monitor');
       }
+
       return this.mode || '';
     },
     modeIconSrc() {
@@ -170,6 +173,7 @@ export default {
       if (this.mode === POLICY_MODE.MONITOR) {
         return this.monitorIconSrc;
       }
+
       return null;
     },
     modeIconClass() {
@@ -179,6 +183,7 @@ export default {
       if (this.mode === POLICY_MODE.MONITOR) {
         return 'icon-search';
       }
+
       return '';
     },
     activeViolationCount() {
@@ -193,17 +198,21 @@ export default {
     violationsSummaryText() {
       const activeLabel = this.t('runtimeEnforcer.tableColumns.runtimeSecurity.popover.active');
       const occurrencesLabel = this.t('runtimeEnforcer.tableColumns.runtimeSecurity.popover.occurrences');
+
       return `${ this.activeViolationCount } ${ activeLabel } | ${ this.totalViolationCount } ${ occurrencesLabel }`;
     },
     lastOccurrenceText() {
       const violations = this.boundPolicy?.status?.violations || [];
+
       if (!violations.length) {
         return '-';
       }
 
       let latest = 0;
+
       violations.forEach((v) => {
         const ts = v?.lastObservedTimestamp ? new Date(v.lastObservedTimestamp).getTime() : 0;
+
         if (ts > latest) {
           latest = ts;
         }

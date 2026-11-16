@@ -6,28 +6,22 @@ describe('NodesEnforcementTable.vue', () => {
   let store: any;
 
   beforeEach(() => {
-    store = createStore({
-      getters: {
-        'i18n/t': () => (key: string) => key,
-      },
-    });
+    store = createStore({ getters: { 'i18n/t': () => (key: string) => key } });
   });
 
   const createWrapper = (props = {}) => {
     return mount(NodesEnforcementTable, {
       global: {
-        plugins: [store],
-        directives: {
-          cleanTooltip: () => {},
-        },
-        stubs: {
+        plugins:    [store],
+        directives: { cleanTooltip: () => {} },
+        stubs:      {
           StatusBadge: {
-            name: 'StatusBadge',
+            name:     'StatusBadge',
             template: '<div class="status-badge-stub">{{ status }}</div>',
-            props: ['status'],
+            props:    ['status'],
           },
           SortableTable: {
-            name: 'SortableTable',
+            name:     'SortableTable',
             template: `
               <div class="sortable-table-stub">
                 <table>
@@ -114,9 +108,11 @@ describe('NodesEnforcementTable.vue', () => {
   it('correctly maps nodesTransitioning objects into table rows with a per-node since', () => {
     const status = {
       nodesTransitioning: [
-        { nodeName: 'node-prod-eu-23', code: 'Transitioning', since: '2026-06-28T17:00:00Z' },
+        {
+          nodeName: 'node-prod-eu-23', code: 'Transitioning', since: '2026-06-28T17:00:00Z'
+        },
       ],
-      totalNodes: 1,
+      totalNodes:      1,
       successfulNodes: 0,
     };
 
@@ -153,8 +149,12 @@ describe('NodesEnforcementTable.vue', () => {
 
   it('omits the ready row entirely when there are no successful nodes', () => {
     const status = {
-      nodesWithIssues: { 'node-1': { code: 'Failed', message: 'boom', since: '2026-06-15T09:45:00Z' } },
-      totalNodes: 1,
+      nodesWithIssues: {
+        'node-1': {
+          code: 'Failed', message: 'boom', since: '2026-06-15T09:45:00Z'
+        }
+      },
+      totalNodes:      1,
       successfulNodes: 0,
     };
 
@@ -172,31 +172,31 @@ describe('NodesEnforcementTable.vue', () => {
 
     expect(headers).toEqual([
       {
-        name: 'status',
+        name:  'status',
         value: 'status',
         label: 'runtimeEnforcer.activePolicy.nodesEnforcement.table.status',
-        sort: 'status',
+        sort:  'status',
         width: 140,
       },
       {
-        name: 'since',
+        name:  'since',
         value: 'since',
         label: 'runtimeEnforcer.activePolicy.nodesEnforcement.table.since',
-        sort: 'since',
+        sort:  'since',
         width: 180,
       },
       {
-        name: 'node',
+        name:  'node',
         value: 'node',
         label: 'runtimeEnforcer.activePolicy.nodesEnforcement.table.node',
-        sort: 'node',
+        sort:  'node',
         width: 200,
       },
       {
-        name: 'message',
+        name:  'message',
         value: 'message',
         label: 'runtimeEnforcer.activePolicy.nodesEnforcement.table.message',
-        sort: 'message',
+        sort:  'message',
       },
     ]);
   });

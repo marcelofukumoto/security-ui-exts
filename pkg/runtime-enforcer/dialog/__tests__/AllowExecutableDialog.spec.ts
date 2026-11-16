@@ -101,7 +101,9 @@ describe('AllowExecutableDialog', () => {
       const policy = { nameDisplay: 'policy-a' };
       const targets = [createTarget('nginx', '/usr/bin/curl')];
       const dispatch = jest.fn();
-      const { wrapper } = mountDialog({ resources: [policy], targets, dispatch });
+      const { wrapper } = mountDialog({
+        resources: [policy], targets, dispatch
+      });
 
       await (wrapper.vm as any).finish();
 

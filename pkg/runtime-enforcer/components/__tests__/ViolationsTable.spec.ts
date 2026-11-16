@@ -16,11 +16,7 @@ describe('ViolationsTable.vue', () => {
   let store: any;
 
   beforeEach(() => {
-    store = createStore({
-      getters: {
-        'i18n/t': () => (key: string) => key,
-      },
-    });
+    store = createStore({ getters: { 'i18n/t': () => (key: string) => key } });
   });
 
   const createWrapper = (props = {}) => {
@@ -128,7 +124,7 @@ describe('ViolationsTable.vue', () => {
     expect(sortableTable.props('rows')).toHaveLength(0);
   });
 
-  it('calls policy.allowExecutables with a single target when a row Allow button is clicked', async () => {
+  it('calls policy.allowExecutables with a single target when a row Allow button is clicked', async() => {
     const allowExecutables = jest.fn();
     const violations = [
       { containerName: 'nginx', executablePath: '/usr/bin/curl-ext' },
@@ -144,7 +140,7 @@ describe('ViolationsTable.vue', () => {
     ]);
   });
 
-  it('calls policy.allowExecutables with all selected rows when the bulk Allow button is clicked', async () => {
+  it('calls policy.allowExecutables with all selected rows when the bulk Allow button is clicked', async() => {
     const allowExecutables = jest.fn();
     const violations = [
       { containerName: 'nginx', executablePath: '/usr/bin/curl-ext' },

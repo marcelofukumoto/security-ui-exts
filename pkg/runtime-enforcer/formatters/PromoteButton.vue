@@ -12,9 +12,9 @@
 <script>
 import RcButton from '@components/RcButton/RcButton.vue';
 export default {
-  name:  'PromoteButton',
+  name:       'PromoteButton',
   components: { RcButton },
-  props: {
+  props:      {
     value: {
       type:    String,
       default: ''

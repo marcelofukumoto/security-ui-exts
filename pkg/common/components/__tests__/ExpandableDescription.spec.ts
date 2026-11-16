@@ -10,11 +10,7 @@ describe('ExpandableDescription.vue', () => {
         text: 'Default testing text',
         ...props
       },
-      global: {
-        mocks: {
-          t: (key) => key
-        }
-      }
+      global: { mocks: { t: (key) => key } }
     });
   };
 
@@ -34,12 +30,14 @@ describe('ExpandableDescription.vue', () => {
     it('renders the provided text', () => {
       wrapper = createWrapper({ text: 'Hello World' });
       const content = wrapper.find('.content-text');
+
       expect(content.text()).toBe('Hello World');
     });
 
     it('applies the clamped class by default', () => {
       wrapper = createWrapper();
       const content = wrapper.find('.content-text');
+
       expect(content.classes()).toContain('clamped');
       expect(content.classes()).not.toContain('expanded');
     });
@@ -47,12 +45,13 @@ describe('ExpandableDescription.vue', () => {
     it('sets the correct CSS variable for line clamps', () => {
       wrapper = createWrapper({ lines: 5 });
       const content = wrapper.find('.content-text');
+
       expect(content.attributes('style')).toContain('--line-clamp: 5');
     });
   });
 
   describe('Truncation Logic', () => {
-    it('shows the "read more" button when scrollHeight is greater than clientHeight', async () => {
+    it('shows the "read more" button when scrollHeight is greater than clientHeight', async() => {
       wrapper = createWrapper();
 
       mockDimensions(wrapper.vm.$refs.content, 100, 60);
@@ -70,7 +69,7 @@ describe('ExpandableDescription.vue', () => {
       expect(wrapper.find('.read-more-btn').text()).toBe('common.general.readMore');
     });
 
-    it('hides the "read more" button when text fits perfectly', async () => {
+    it('hides the "read more" button when text fits perfectly', async() => {
       wrapper = createWrapper();
 
       mockDimensions(wrapper.vm.$refs.content, 40, 40);
@@ -85,7 +84,7 @@ describe('ExpandableDescription.vue', () => {
   });
 
   describe('User Interaction', () => {
-    it('expands the text and hides the button when "read more" is clicked', async () => {
+    it('expands the text and hides the button when "read more" is clicked', async() => {
       wrapper = createWrapper();
 
       // Force it to be truncatable first so the button renders
@@ -96,6 +95,7 @@ describe('ExpandableDescription.vue', () => {
 
       // Ensure button is there, then click it
       const btn = wrapper.find('.read-more-btn');
+
       expect(btn.exists()).toBe(true);
       await btn.trigger('click');
 
@@ -110,7 +110,7 @@ describe('ExpandableDescription.vue', () => {
   });
 
   describe('Watchers and Lifecycle Hooks', () => {
-    it('re-evaluates truncation when the text prop changes', async () => {
+    it('re-evaluates truncation when the text prop changes', async() => {
       wrapper = createWrapper();
       const checkSpy = jest.spyOn(wrapper.vm, 'checkTruncation');
 

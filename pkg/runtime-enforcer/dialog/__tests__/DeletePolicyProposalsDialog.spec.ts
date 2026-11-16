@@ -4,15 +4,13 @@ import { exceptionToErrorsArray } from '@shell/utils/error';
 import { PRODUCT_NAME } from '@runtime-enforcer/types/runtime-enforcer.ts';
 import { TIMESTAMP } from '@shell/config/labels-annotations';
 
-jest.mock('@shell/utils/error', () => ({
-  exceptionToErrorsArray: jest.fn((err) => [err]),
-}));
+jest.mock('@shell/utils/error', () => ({ exceptionToErrorsArray: jest.fn((err) => [err]) }));
 
 const t = jest.fn((key, args, raw) => (raw ? `${ key }:${ JSON.stringify(args) }` : key));
 
 const createResource = (name = 'proposal-a', workloadName?: string) => ({
   nameDisplay: name,
-  metadata: {
+  metadata:    {
     namespace:       'runtime-enforcer',
     ownerReferences: workloadName ? [{ kind: 'Deployment', name: workloadName }] : [],
   },
@@ -27,7 +25,7 @@ const mountDialog = ({
   push = jest.fn(),
 } = {}) => {
   return shallowMount(DeletePolicyProposalsDialog as any, {
-    props: { resources, table },
+    props:  { resources, table },
     global: {
       mocks: {
         t,
@@ -62,9 +60,7 @@ describe('DeletePolicyProposalsDialog', () => {
     });
 
     it('is bulk and uses bulk copy for multiple resources', () => {
-      const wrapper = mountDialog({
-        resources: [createResource('a', 'wk-a'), createResource('b', 'wk-b')],
-      });
+      const wrapper = mountDialog({ resources: [createResource('a', 'wk-a'), createResource('b', 'wk-b')] });
 
       expect((wrapper.vm as any).isBulk).toBe(true);
       expect((wrapper.vm as any).title).toBe('runtimeEnforcer.policyProposal.deleteDialog.title.bulk');
@@ -142,7 +138,9 @@ describe('DeletePolicyProposalsDialog', () => {
       const push = jest.fn();
       const dispatch = jest.fn();
       const resources = [createResource('policy-a', 'wk-a'), createResource('policy-b', 'wk-b')];
-      const wrapper = mountDialog({ resources, push, dispatch });
+      const wrapper = mountDialog({
+        resources, push, dispatch
+      });
       const redeploySpy = jest.spyOn(wrapper.vm as any, 'redeployWorkload').mockResolvedValue(undefined);
 
       await (wrapper.vm as any).deletePolicies();

@@ -12,17 +12,7 @@ describe('utils/workload-policy.ts', () => {
     it('returns policy name from CronJob nested template spec', () => {
       const cronJob = {
         kind: 'CronJob',
-        spec: {
-          jobTemplate: {
-            spec: {
-              template: {
-                metadata: {
-                  labels: { [policyLabelKey]: 'cron-policy' },
-                },
-              },
-            },
-          },
-        },
+        spec: { jobTemplate: { spec: { template: { metadata: { labels: { [policyLabelKey]: 'cron-policy' } } } } } },
       };
 
       expect(getBoundPolicyName(cronJob)).toBe('cron-policy');
@@ -31,13 +21,7 @@ describe('utils/workload-policy.ts', () => {
     it('returns policy name from standard workload template spec (Deployment, DaemonSet, StatefulSet, Job, ReplicaSet)', () => {
       const deployment = {
         kind: 'Deployment',
-        spec: {
-          template: {
-            metadata: {
-              labels: { [policyLabelKey]: 'deployment-policy' },
-            },
-          },
-        },
+        spec: { template: { metadata: { labels: { [policyLabelKey]: 'deployment-policy' } } } },
       };
 
       expect(getBoundPolicyName(deployment)).toBe('deployment-policy');
@@ -57,16 +41,8 @@ describe('utils/workload-policy.ts', () => {
 
     it('prefers template labels over top-level metadata labels when both exist', () => {
       const workload = {
-        metadata: {
-          labels: { [policyLabelKey]: 'root-policy' },
-        },
-        spec: {
-          template: {
-            metadata: {
-              labels: { [policyLabelKey]: 'template-policy' },
-            },
-          },
-        },
+        metadata: { labels: { [policyLabelKey]: 'root-policy' } },
+        spec:     { template: { metadata: { labels: { [policyLabelKey]: 'template-policy' } } } },
       };
 
       expect(getBoundPolicyName(workload)).toBe('template-policy');
@@ -115,16 +91,8 @@ describe('utils/workload-policy.ts', () => {
 
     it('matches policy by both name and namespace', () => {
       const row = {
-        metadata: {
-          namespace: 'cattle-system',
-        },
-        spec: {
-          template: {
-            metadata: {
-              labels: { [policyLabelKey]: 'strict-db' },
-            },
-          },
-        },
+        metadata: { namespace: 'cattle-system' },
+        spec:     { template: { metadata: { labels: { [policyLabelKey]: 'strict-db' } } } },
       };
 
       const matched = findBoundPolicy(row, mockPolicies);
@@ -135,16 +103,8 @@ describe('utils/workload-policy.ts', () => {
 
     it('returns null when the policy name matches but the namespace does not', () => {
       const row = {
-        metadata: {
-          namespace: 'production',
-        },
-        spec: {
-          template: {
-            metadata: {
-              labels: { [policyLabelKey]: 'strict-db' },
-            },
-          },
-        },
+        metadata: { namespace: 'production' },
+        spec:     { template: { metadata: { labels: { [policyLabelKey]: 'strict-db' } } } },
       };
 
       expect(findBoundPolicy(row, mockPolicies)).toBeNull();
@@ -175,11 +135,7 @@ describe('utils/workload-policy.ts', () => {
     });
 
     it('returns null when workload namespace is missing', () => {
-      const row = {
-        metadata: {
-          labels: { [policyLabelKey]: 'strict-db' },
-        },
-      };
+      const row = { metadata: { labels: { [policyLabelKey]: 'strict-db' } } };
 
       expect(findBoundPolicy(row, mockPolicies)).toBeNull();
     });
@@ -196,23 +152,13 @@ describe('utils/workload-policy.ts', () => {
     });
 
     it('falls back to getBoundPolicyName when runtimeSecuritySortValue is undefined', () => {
-      const row = {
-        spec: {
-          template: {
-            metadata: {
-              labels: { [policyLabelKey]: 'bound-policy' },
-            },
-          },
-        },
-      };
+      const row = { spec: { template: { metadata: { labels: { [policyLabelKey]: 'bound-policy' } } } } };
 
       expect(getRuntimeSecurityValue(row)).toBe('bound-policy');
     });
 
     it('returns empty string when row is not bound and has no sort value', () => {
-      const row = {
-        metadata: { labels: {} },
-      };
+      const row = { metadata: { labels: {} } };
 
       expect(getRuntimeSecurityValue(row)).toBe('');
     });

@@ -16,9 +16,7 @@ describe('allowExecutables', () => {
   });
 
   it('appends to an existing allowed list without duplicating entries', async() => {
-    const policy = createPolicy({
-      rulesByContainer: { nginx: { executables: { allowed: ['/usr/bin/curl'] } } },
-    });
+    const policy = createPolicy({ rulesByContainer: { nginx: { executables: { allowed: ['/usr/bin/curl'] } } } });
 
     await allowExecutables(policy, [
       { containerName: 'nginx', executablePath: '/usr/bin/curl' },

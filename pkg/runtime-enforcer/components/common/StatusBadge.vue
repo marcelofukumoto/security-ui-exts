@@ -69,15 +69,14 @@ export default {
     }
   },
   data() {
-    return {
-      showOnTop: false
-    };
+    return { showOnTop: false };
   },
   methods: {
     checkPosition() {
       if (this.$refs.trigger) {
         const trigger = this.$refs.trigger.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
+
         this.showOnTop = (viewportHeight - trigger.bottom < 300);
       }
     }
@@ -85,16 +84,16 @@ export default {
   computed: {
     statusClass() {
       switch (this.status) {
-        case POLICY_STATUS.TRANSITIONING:
-          return 'transitioning';
-        case POLICY_STATUS.READY:
-          return 'ready';
-        case POLICY_STATUS.FAILED:
-          return 'failed';
-        case POLICY_STATUS.MISSING:
-          return 'missing';
-        default:
-          return 'none';
+      case POLICY_STATUS.TRANSITIONING:
+        return 'transitioning';
+      case POLICY_STATUS.READY:
+        return 'ready';
+      case POLICY_STATUS.FAILED:
+        return 'failed';
+      case POLICY_STATUS.MISSING:
+        return 'missing';
+      default:
+        return 'none';
       }
     }
   }

@@ -7,22 +7,14 @@ describe('DeploymentDetailRuntimeSecurity.vue', () => {
       name:      'aks-config-operator',
       namespace: 'cattle-system',
     },
-    spec: {
-      template: {
-        metadata: {
-          labels: { 'runtimeenforcer.kubewarden.io/policy': 'strict-db' },
-        },
-      },
-    },
+    spec: { template: { metadata: { labels: { 'runtimeenforcer.kubewarden.io/policy': 'strict-db' } } } },
   };
 
   const createWrapper = (props = {}) => {
     return shallowMount(DeploymentDetailRuntimeSecurity, {
       props,
       global: {
-        mocks: {
-          t: (key: string) => key,
-        },
+        mocks: { t: (key: string) => key },
         stubs: {
           RuntimeSecurityCell: {
             name:     'RuntimeSecurityCell',
@@ -43,6 +35,7 @@ describe('DeploymentDetailRuntimeSecurity.vue', () => {
     );
 
     const cell = wrapper.findComponent({ name: 'RuntimeSecurityCell' });
+
     expect(cell.exists()).toBe(true);
     expect(cell.props('row')).toEqual(mockWorkload);
   });
@@ -52,6 +45,7 @@ describe('DeploymentDetailRuntimeSecurity.vue', () => {
 
     expect(wrapper.find('.deployment-runtime-security-row').exists()).toBe(true);
     const cell = wrapper.findComponent({ name: 'RuntimeSecurityCell' });
+
     expect(cell.exists()).toBe(true);
     expect(cell.props('row')).toEqual(mockWorkload);
   });
@@ -66,6 +60,7 @@ describe('DeploymentDetailRuntimeSecurity.vue', () => {
     });
 
     const cell = wrapper.findComponent({ name: 'RuntimeSecurityCell' });
+
     expect(cell.props('row')).toEqual(valueWorkload);
   });
 

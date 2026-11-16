@@ -4,9 +4,7 @@ import { exceptionToErrorsArray } from '@shell/utils/error';
 import { NAMESPACE } from '@shell/config/types';
 import { NAME as NAME_COL, TYPE, NAMESPACE as NAMESPACE_COL, AGE } from '@shell/config/table-headers';
 
-jest.mock('@shell/utils/error', () => ({
-  exceptionToErrorsArray: jest.fn((err) => [err]),
-}));
+jest.mock('@shell/utils/error', () => ({ exceptionToErrorsArray: jest.fn((err) => [err]) }));
 
 const t = jest.fn((key, args, raw) => (raw ? `${ key }:${ JSON.stringify(args) }` : key));
 
@@ -24,31 +22,29 @@ const createWrapper = ({
   attachTo?: HTMLElement,
 } = {}) => {
   return shallowMount(SsImportDialog as any, {
-    props: { defaultNamespace },
+    props:  { defaultNamespace },
     attachTo,
     global: {
       mocks: {
         t,
         $store: {
           dispatch,
-          getters: {
-            currentCluster: { doAction },
-          },
+          getters: { currentCluster: { doAction } },
         },
       },
       directives: {
-        t: () => undefined,
+        t:            () => undefined,
         'clean-html': () => undefined,
       },
       stubs: {
-        FileSelector: true,
+        FileSelector:  true,
         LabeledSelect: true,
         SortableTable: true,
-        YamlEditor: true,
-        Banner: true,
-        Card: true,
-        AsyncButton: true,
-        RcButton: true,
+        YamlEditor:    true,
+        Banner:        true,
+        Card:          true,
+        AsyncButton:   true,
+        RcButton:      true,
       },
     },
   });
@@ -179,9 +175,7 @@ describe('ImportDialog', () => {
       const updateValue = jest.fn();
       const ctx: any = {
         errors: ['old'],
-        $refs:  {
-          yamleditor: { updateValue },
-        },
+        $refs:  { yamleditor: { updateValue } },
       };
 
       (wrapper.vm as any).$options.methods.onFileSelected.call(ctx, 'kind: ConfigMap');

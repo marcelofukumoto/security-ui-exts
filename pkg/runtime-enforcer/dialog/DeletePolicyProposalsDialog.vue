@@ -24,9 +24,7 @@ export default {
   },
 
   data() {
-    return {
-      deleteInProgress: false,
-    };
+    return { deleteInProgress: false };
   },
 
   computed: {
@@ -111,7 +109,7 @@ export default {
     async deletePolicies() {
       try {
         this.deleteInProgress = true;
-        await Promise.all((this.resources || []).map(async (resource) => {
+        await Promise.all((this.resources || []).map(async(resource) => {
           const resourceBackup = { ...resource };
 
           await resource?.remove?.();

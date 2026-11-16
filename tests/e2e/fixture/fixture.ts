@@ -22,7 +22,7 @@ type PageObjects = {
 };
 
 export const test = base.extend<PageObjects>({
-  page: async ({ page }, use) => {
+  page: async({ page }, use) => {
     const consolelogs: string[] = [];
 
     // capture errors like failed network calls, etc.
@@ -43,14 +43,14 @@ export const test = base.extend<PageObjects>({
     const showConsoleErrors = process.env.SHOW_CONSOLE_ERRORS !== 'false';
 
     if (showConsoleErrors) {
-      console.log("");
-      console.log(" ------------------------------------------------------------------------- ");
-      console.log(" >>> Captured Browser Console Log Errors <<<  ");
-      console.log(" ------------------------------------------------------------------------- ");
+      console.log('');
+      console.log(' ------------------------------------------------------------------------- ');
+      console.log(' >>> Captured Browser Console Log Errors <<<  ');
+      console.log(' ------------------------------------------------------------------------- ');
       console.log(consolelogs);
-      console.log("");
-      console.log(" ------------------------------------------------------------------------- ");
-      console.log("");
+      console.log('');
+      console.log(' ------------------------------------------------------------------------- ');
+      console.log('');
     }
 
     /* Failed the test if error is captured in the console log */
@@ -59,27 +59,27 @@ export const test = base.extend<PageObjects>({
   },
 
   // Provide page objects as fixtures
-  dashboardPage: async ({ page }, use) => {
+  dashboardPage: async({ page }, use) => {
     await use(new DashboardPage(page));
   },
 
-  imagesPage: async ({ page }, use) => {
+  imagesPage: async({ page }, use) => {
     await use(new ImagesPage(page));
   },
 
-  workloadsScanPage: async ({ page }, use) => {
+  workloadsScanPage: async({ page }, use) => {
     await use(new WorkloadsScanPage(page));
   },
 
-  registriesPage: async ({ page }, use) => {
+  registriesPage: async({ page }, use) => {
     await use(new RegistriesPage(page));
   },
 
-  vexManagementPage: async ({ page }, use) => {
+  vexManagementPage: async({ page }, use) => {
     await use(new VexManagementPage(page));
   },
 
-  sideNav: async ({ page }, use) => {
+  sideNav: async({ page }, use) => {
     await use(new SideNav(page));
   },
 });
