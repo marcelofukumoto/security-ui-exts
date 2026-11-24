@@ -274,6 +274,13 @@ jobs:
           GREPI="90-.*install: [$ex]"
         fi
 
+        # From charts.kubewarden.io the extension doesn't recognize the Admission Controller, since it
+        # finds it by its AppCo chart names: leave out the tests that rely on that. Policy reports and
+        # telemetry need it throughout; their other tests only set up or clean up for them
+        if [[ "$KW" == "github" ]]; then
+          GREPI="${GREPI:+$GREPI|}(50-policyreports|60-telemetry)\.spec|Create with custom values|Recommended policies"
+        fi
+
         yarn playwright test ${TFILTER:-} ${GREPI:+--grep-invert "$GREPI"} -x
       env:
         MODE: ${{ matrix.mode }}
@@ -282,6 +289,9 @@ jobs:
         # Check that installed extension version matches release tag
         UIVERSION: ${{ github.event_name == 'release' && inputs.tag || '' }}
         ORIGIN: ${{ steps.setup.outputs.kubewarden }}
+        # Install the Admission Controller from AppCo when its credentials are available, and from
+        # charts.kubewarden.io when they aren't, as on pull requests from forks
+        KW: ${{ secrets.APPCO_USERNAME != '' && secrets.APPCO_PASSWORD != '' && 'appco' || 'github' }}
         QASE_MODE: ${{ env.QASE == 'true' && 'testops' || 'off' }}
         QASE_TESTOPS_API_TOKEN: ${{ secrets.QASE_APITOKEN }}
         QASE_TESTOPS_RUN_TITLE: "Run[${{github.event_name}}]: UI[${{ steps.setup.outputs.kubewarden }}] - MODE[${{ matrix.mode }}] - RANCHER[${{ matrix.rancher }}] "
