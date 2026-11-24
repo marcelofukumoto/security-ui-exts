@@ -105,7 +105,8 @@ env:
   # Github -> Secrets and variables -> Actions -> New repository variable
   K3D_VERSION: # 'v5.6.3' - optionally pin version
   K3S_VERSION: ${{ inputs.k3s != 'auto' && inputs.k3s || '' }}
-  K3D_CLUSTER_NAME: ${{ github.repository_owner }}-${{ github.event.repository.name }}-runner
+  # Fresh VM per job, so the name needn't be unique per repository (k3d allows at most 32 characters)
+  K3D_CLUSTER_NAME: kubewarden-e2e
   # First value after the && must be truthy. Otherwise, the value after the || will always be returned
   TESTBASE: ${{ github.event_name != 'workflow_dispatch' && true || inputs.testbase }}
   TESTPOLICIES: ${{ inputs.testpolicies || false }}
@@ -148,7 +149,7 @@ jobs:
 
     # Run schedule workflows only on original repo, not forks
     if: github.event_name != 'schedule' || github.repository_owner == 'rancher'
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     # ==================================================================================================
 
@@ -200,8 +201,27 @@ jobs:
       with:
         persist-credentials: false
 
+    # k3d's install script at a pinned release, as kubewarden-end-to-end-tests installs it in its own CI
+    - name: Download k3d install script
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        repository: k3d-io/k3d
+        ref: 201b614ea6798f0ee9e75c63360eef891b36bb19 # v5.8.3
+        sparse-checkout: install.sh
+        sparse-checkout-cone-mode: false
+        path: .k3d
+        persist-credentials: false
+
     - name: Install k3d
-      run: TAG="$K3D_VERSION" sudo --preserve-env=TAG k3d-install
+      run: TAG="$K3D_VERSION" bash .k3d/install.sh
+
+    # Same as e2e-ui.yml: on the current ubuntu-latest kernel, AppArmor keeps Rancher's helm-operation
+    # pods 1/2 NotReady, and the suite installs its charts through those operations
+    - name: Relax AppArmor change_profile restriction
+      run: |
+        if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_unconfined ]; then
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_unconfined=0
+        fi
 
     - name: Install Rancher
       uses: kubewarden/kubewarden-end-to-end-tests@4b6152474041a11b58a99da1d5ec1a2716503bc2 # main
@@ -234,7 +254,7 @@ jobs:
       working-directory: tests/kubewarden
       run: |
         yarn install
-        yarn playwright install chromium  # --with-deps not supported on opensuse
+        yarn playwright install --with-deps chromium
 
     - name: Typecheck
       if: github.event_name == 'pull_request'
@@ -262,6 +282,9 @@ jobs:
         # Check that installed extension version matches release tag
         UIVERSION: ${{ github.event_name == 'release' && inputs.tag || '' }}
         ORIGIN: ${{ steps.setup.outputs.kubewarden }}
+        # Pull requests from forks get no secrets, so they install the Admission Controller from
+        # charts.kubewarden.io; the other runs install it from AppCo
+        KW: ${{ github.event_name == 'pull_request' && 'github' || 'appco' }}
         QASE_MODE: ${{ env.QASE == 'true' && 'testops' || 'off' }}
         QASE_TESTOPS_API_TOKEN: ${{ secrets.QASE_APITOKEN }}
         QASE_TESTOPS_RUN_TITLE: "Run[${{github.event_name}}]: UI[${{ steps.setup.outputs.kubewarden }}] - MODE[${{ matrix.mode }}] - RANCHER[${{ matrix.rancher }}] "

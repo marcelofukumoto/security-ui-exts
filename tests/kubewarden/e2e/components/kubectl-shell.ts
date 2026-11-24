@@ -96,18 +96,18 @@ export class Shell {
 
     // Command finished when we see EXITSTATUS-
     await expect(async() => {
-      await this.expectScreenshots(['shell/EXITSTATUS-NaN.png', 'shell/EXITSTATUS-NaN-leap.png'], { clip: { ...clip, width: 77 } })
+      await this.expectScreenshots(['shell/EXITSTATUS-NaN.png', 'shell/EXITSTATUS-NaN-leap.png', 'shell/EXITSTATUS-NaN-ubuntu.png'], { clip: { ...clip, width: 77 } })
     }).toPass({ timeout, intervals: [500, 1_000, 5_000] })
 
     let statusCode = NaN
     if (isFinite(status)) {
       // Verify command exit status
-      await this.expectScreenshots([`shell/EXITSTATUS-${status}.png`, `shell/EXITSTATUS-${status}-leap.png`], { clip })
+      await this.expectScreenshots([`shell/EXITSTATUS-${status}.png`, `shell/EXITSTATUS-${status}-leap.png`, `shell/EXITSTATUS-${status}-ubuntu.png`], { clip })
       statusCode = status
     } else {
       // Return exit status 0 if command passed (for retries)
       try {
-        await this.expectScreenshots(['shell/EXITSTATUS-0.png', 'shell/EXITSTATUS-0-leap.png'], { clip })
+        await this.expectScreenshots(['shell/EXITSTATUS-0.png', 'shell/EXITSTATUS-0-leap.png', 'shell/EXITSTATUS-0-ubuntu.png'], { clip })
         statusCode = 0
       } catch {}
     }
@@ -161,7 +161,8 @@ export class Shell {
     let cmdStatus = 0
     let cmdOutput: string
     try {
-      cmdOutput = execSync(cmd, { timeout }).toString()
+      // Commands use bash syntax such as &>, and /bin/sh is not bash on every runner
+      cmdOutput = execSync(cmd, { timeout, shell: '/bin/bash' }).toString()
     } catch(e: any) {
       cmdStatus = e.status
       cmdOutput = e.stderr.toString()
