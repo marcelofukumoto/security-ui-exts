@@ -260,6 +260,21 @@ jobs:
       if: github.event_name == 'pull_request'
       run: npx tsc -p tests/kubewarden/tsconfig.json --noEmit
 
+    # PROBE ONLY: render the shell markers on this runner before the suite uses them
+    - name: Render shell markers
+      working-directory: tests/kubewarden
+      run: yarn playwright test '\/00' '05-shell-markers'
+      env:
+        ORIGIN: ${{ steps.setup.outputs.kubewarden }}
+        KW: github
+
+    - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+      if: always()
+      with:
+        name: shell-markers
+        path: tests/kubewarden/e2e/screenshots/chromium/
+        retention-days: 5
+
     - name: Execute tests
       timeout-minutes: 120
       working-directory: tests/kubewarden
@@ -274,7 +289,7 @@ jobs:
           GREPI="90-.*install: [$ex]"
         fi
 
-        yarn playwright test ${TFILTER:-} ${GREPI:+--grep-invert "$GREPI"} -x
+        yarn playwright test ${TFILTER:-} ${GREPI:+--grep-invert "$GREPI"}  # PROBE ONLY: no -x, list every failure
       env:
         MODE: ${{ matrix.mode }}
         # Override OTEL operator version by github variable
